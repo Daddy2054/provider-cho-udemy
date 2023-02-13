@@ -16,11 +16,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<Dog>(
-          create: (context) => Dog(
-            name: 'dog06',
-            breed: 'breed06',
-            age: 3,
-          ),
+          create: (context) => Dog(name: 'dog06', breed: 'breed06', age: 3),
         ),
         FutureProvider<int>(
           initialData: 0,
@@ -28,6 +24,14 @@ class MyApp extends StatelessWidget {
             final int dogAge = context.read<Dog>().age;
             final babies = Babies(age: dogAge);
             return babies.getBabies();
+          },
+        ),
+        StreamProvider<String>(
+          initialData: 'Bark 0 times',
+          create: (context) {
+            final int dogAge = context.read<Dog>().age;
+            final babies = Babies(age: dogAge * 2);
+            return babies.bark();
           },
         ),
       ],
@@ -109,7 +113,15 @@ class Age extends StatelessWidget {
           style: TextStyle(fontSize: 20.0),
         ),
         SizedBox(height: 10.0),
-        Text('- number of babies: ${context.read<int>()}',style: TextStyle(fontSize: 20.0),),
+        Text(
+          '- number of babies: ${context.read<int>()}',
+          style: TextStyle(fontSize: 20.0),
+        ),
+        SizedBox(height: 10.0),
+        Text(
+          '- ${context.watch<String>()}',
+          style: TextStyle(fontSize: 20.0),
+        ),
         SizedBox(height: 20.0),
         ElevatedButton(
           onPressed: () => context.read<Dog>().grow(),

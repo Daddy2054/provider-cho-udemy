@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'models/babies.dart';
 import 'models/dog.dart';
 
 void main() {
@@ -12,10 +13,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<Dog>(
-      create: (context) => Dog(name: 'dog05', breed: 'breed05',age:3),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<Dog>(
+          create: (context) => Dog(
+            name: 'dog06',
+            breed: 'breed06',
+            age: 3,
+          ),
+        ),
+        FutureProvider<int>(
+          initialData: 0,
+          create: (context) {
+            final int dogAge = context.read<Dog>().age;
+            final babies = Babies(age: dogAge);
+            return babies.getBabies();
+          },
+        ),
+      ],
       child: MaterialApp(
-        title: 'Provider 05',
+        title: 'Provider 06',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -38,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Provider 05'),
+        title: Text('Provider 06'),
       ),
       body: Center(
         child: Column(
@@ -68,7 +85,7 @@ class BreedAndAge extends StatelessWidget {
     return Column(
       children: [
         Text(
-          '- breed: ${context.select<Dog,String>((Dog dog) => dog.breed)}',
+          '- breed: ${context.select<Dog, String>((Dog dog) => dog.breed)}',
           style: TextStyle(fontSize: 20.0),
         ),
         SizedBox(height: 10.0),
@@ -88,9 +105,11 @@ class Age extends StatelessWidget {
     return Column(
       children: [
         Text(
-          '- age: ${context.select<Dog,int>((Dog dog) => dog.age)}',
+          '- age: ${context.select<Dog, int>((Dog dog) => dog.age)}',
           style: TextStyle(fontSize: 20.0),
         ),
+        SizedBox(height: 10.0),
+        Text('- number of babies: ${context.read<int>()}',style: TextStyle(fontSize: 20.0),),
         SizedBox(height: 20.0),
         ElevatedButton(
           onPressed: () => context.read<Dog>().grow(),

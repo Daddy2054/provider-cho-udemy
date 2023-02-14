@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'pages/chgnotiprov_chgnotiproxyprov.dart';
-import 'pages/chgnotiprov_proxyprov.dart';
-import 'pages/proxyprov_create_update.dart';
-import 'pages/proxyprov_proxyprov.dart';
-import 'pages/proxyprov_update.dart';
-import 'pages/why_proxyprov.dart';
+import 'pages/counter_page.dart';
+import 'pages/handle_dialog_page.dart';
+import 'pages/navigate_page.dart';
+import 'providers/counter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,13 +15,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ProxyProvider Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider<Counter>(
+      create: (_) => Counter(),
+      child: MaterialApp(
+        title: 'addPostFrameCallback',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(),
       ),
-      home: const MyHomePage(),
     );
   }
 }
@@ -41,84 +43,39 @@ class MyHomePage extends StatelessWidget {
             children: [
               ElevatedButton(
                 child: Text(
-                  'Why\nProxyProvider',
+                  'Counter Page',
                   style: TextStyle(fontSize: 20.0),
-                  textAlign: TextAlign.center,
                 ),
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => WhyProxyProv(),
+                    builder: (_) => CounterPage(),
                   ),
                 ),
               ),
               SizedBox(height: 20.0),
               ElevatedButton(
                 child: Text(
-                  'ProxyProvider\nupdate',
+                  'Handle Dialog Page',
                   style: TextStyle(fontSize: 20.0),
-                  textAlign: TextAlign.center,
                 ),
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => ProxyProvUpdate(),
+                    builder: (_) => HandleDialogPage(),
                   ),
                 ),
               ),
               SizedBox(height: 20.0),
               ElevatedButton(
                 child: Text(
-                  'ProxyProvider\ncreate/update',
+                  'Navigate Page',
                   style: TextStyle(fontSize: 20.0),
-                  textAlign: TextAlign.center,
                 ),
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => ProxyProvCreateUpdate(),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                child: Text(
-                  'ProxyProvider\nProxyProvider',
-                  style: TextStyle(fontSize: 20.0),
-                  textAlign: TextAlign.center,
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ProxyProvProxyProv(),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                child: Text(
-                  'ChangeNotifierProvider\nChangeNotifierProxyProvider',
-                  style: TextStyle(fontSize: 20.0),
-                  textAlign: TextAlign.center,
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ChgNotiProvChgNotiProxyProv(),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                child: Text(
-                  'ChangeNotifierProvider\nProxyProvider',
-                  style: TextStyle(fontSize: 20.0),
-                  textAlign: TextAlign.center,
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ChgNotiProvProxyProv(),
+                    builder: (_) => NavigatePage(),
                   ),
                 ),
               ),

@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'show_me_counter.dart';
 
 import 'counter.dart';
+import 'show_me_counter.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final Counter _counter = Counter();
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +26,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ChangeNotifierProvider<Counter>(
-          create: (context) => Counter(), child: const MyHomePage()),
+      routes: {
+        '/': (context) => ChangeNotifierProvider.value(
+              value: _counter,
+              child: MyHomePage(),
+            ),
+        '/counter': (context) => ChangeNotifierProvider.value(
+              value: _counter,
+              child: ShowMeCounter(),
+            ),
+      },
     );
+  }
+  @override
+  void dispose() {
+    _counter.dispose();
+    super.dispose();
   }
 }
 
@@ -41,15 +61,7 @@ class MyHomePage extends StatelessWidget {
                 style: TextStyle(fontSize: 20.0),
               ),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) {
-                    return ChangeNotifierProvider.value(
-                      value: context.read<Counter>(),
-                      child: ShowMeCounter(),
-                    );
-                  }),
-                );
+                Navigator.pushNamed(context, '/counter');
               },
             ),
             SizedBox(height: 20.0),
@@ -61,7 +73,7 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {
                 context.read<Counter>().increment();
               },
-            ),
+            )
           ],
         ),
       ),

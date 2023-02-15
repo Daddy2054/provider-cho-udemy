@@ -1,4 +1,7 @@
-import 'package:flutter/foundation.dart';
+//import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+import 'success_page.dart';
 
 enum AppState {
   initial,
@@ -14,8 +17,9 @@ class AppProvider with ChangeNotifier {
   Future<void> getResult(String searchTerm) async {
     _state = AppState.loading;
     notifyListeners();
- await Future.delayed(const Duration(seconds: 1));
-     
+
+    await Future.delayed(const Duration(seconds: 1));
+
     try {
       if (searchTerm == 'fail') {
         throw 'Something went wrong';
@@ -23,10 +27,19 @@ class AppProvider with ChangeNotifier {
       // throw Exception('Error');
       _state = AppState.success;
       notifyListeners();
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (context) => SuccessPage()));
     } catch (e) {
       _state = AppState.error;
       notifyListeners();
-
+      // showDialog(
+      //   context: context,
+      //   builder: (context) {
+      //     return AlertDialog(
+      //       content: Text('something went wrong'),
+      //     );
+      //   },
+      // );
     }
   }
 }

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/counter_page.dart';
-import 'pages/handle_dialog_page.dart';
-import 'pages/navigate_page.dart';
-import 'providers/counter.dart';
+import 'app_provider.dart';
+import 'success_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,10 +13,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<Counter>(
-      create: (_) => Counter(),
+    return ChangeNotifierProvider<AppProvider>(
+      create: (_) => AppProvider(),
       child: MaterialApp(
-        title: 'addPostFrameCallback',
+        title: 'addListener of ChangeNotifier',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -29,57 +27,88 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  String? searchTerm;
+
+  void submit() async {
+    setState(() {
+      autovalidateMode = AutovalidateMode.always;
+    });
+    final form = formKey.currentState;
+    if (form == null || !form.validate()) {
+      return;
+    }
+    form.save();
+
+    try {
+      await context.read<AppProvider>().getResult(searchTerm!);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SuccessPage(),
+          ));
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text('something went wrong'),
+          );
+        },
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final appState = context.watch<AppProvider>().state;
+
     return Scaffold(
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              ElevatedButton(
-                child: Text(
-                  'Counter Page',
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => CounterPage(),
+          child: Form(
+            key: formKey,
+            autovalidateMode: autovalidateMode,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                TextFormField(
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    label: Text('Search'),
+                    prefixIcon: Icon(Icons.search),
                   ),
+                  validator: (String? value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Search term required';
+                    }
+                    return null;
+                  },
+                  onSaved: (String? value) {
+                    searchTerm = value;
+                  },
                 ),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                child: Text(
-                  'Handle Dialog Page',
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => HandleDialogPage(),
+                const SizedBox(height: 20.0),
+                ElevatedButton(
+                  child: Text(
+                    appState == AppState.loading ? 'Loading...' : 'Get Result',
+                    style: TextStyle(fontSize: 24.0),
                   ),
+                  onPressed: appState == AppState.loading ? null : submit,
                 ),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                child: Text(
-                  'Navigate Page',
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => NavigatePage(),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

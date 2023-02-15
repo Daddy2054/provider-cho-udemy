@@ -7,15 +7,26 @@ class NavigatePage extends StatefulWidget {
   const NavigatePage({Key? key}) : super(key: key);
 
   @override
-  State<NavigatePage> createState() => _NavigatePageState();
+  _NavigatePageState createState() => _NavigatePageState();
 }
 
 class _NavigatePageState extends State<NavigatePage> {
   @override
   Widget build(BuildContext context) {
+    if (context.read<Counter>().counter == 3) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtherPage(),
+          ),
+        );
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Navigate'),
+        title: Text('Navigage'),
       ),
       body: Center(
         child: Text(

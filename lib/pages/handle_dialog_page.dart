@@ -27,10 +27,9 @@ class _HandleDialogPageState extends State<HandleDialogPage> {
   }
 
   @override
-    Widget build(BuildContext context) {
-  
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+  Widget build(BuildContext context) {
     if (context.read<Counter>().counter == 3) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         showDialog(
           context: context,
           builder: (context) {
@@ -39,7 +38,8 @@ class _HandleDialogPageState extends State<HandleDialogPage> {
             );
           },
         );
-    }});
+      });
+    }
     
    
     return Scaffold(

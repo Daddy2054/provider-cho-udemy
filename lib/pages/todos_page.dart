@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_cho_udemy/models/todo_model.dart';
-import 'package:provider_cho_udemy/providers/todo_filter.dart';
-import 'package:provider_cho_udemy/providers/todo_list.dart';
 
-import '../providers/active_todo_count.dart';
-import '../providers/todo_search.dart';
+import '../providers/providers.dart';
 
 class TodosPage extends StatefulWidget {
   const TodosPage({Key? key}) : super(key: key);
@@ -29,9 +26,10 @@ class _TodosPageState extends State<TodosPage> {
               children: [
 //                              Text('TODOS'),
                 const TodoHeader(),
-                CreateTodo(),
+                const CreateTodo(),
                 const SizedBox(height: 20),
-                SearchAndFilterTodo(),
+                const SearchAndFilterTodo(),
+                const ShowTodos(),
               ],
             ),
           ),
@@ -154,6 +152,35 @@ class _CreateTodoState extends State<CreateTodo> {
           context.read<TodoList>().addTodo(todoDesc);
           newTodoController.clear();
         }
+      },
+    );
+  }
+}
+
+class ShowTodos extends StatelessWidget {
+  const ShowTodos({Key? key}): super(key:key);
+
+  @override
+  Widget build(BuildContext context) {
+    final todos = context.watch<FilteredTodos>().state.filteredTodos;
+    //print(todos);
+    //print(index);
+    return ListView.separated(
+      primary: false,
+      shrinkWrap: true,
+      itemCount: todos.length,
+      separatorBuilder: (
+        BuildContext context,
+        int index,
+      ) =>
+          Divider(
+        color: Colors.grey,
+      ),
+      itemBuilder: (BuildContext context, int index) {
+        return Text(
+          todos[index].desc,
+          style: TextStyle(fontSize: 20),
+        );
       },
     );
   }

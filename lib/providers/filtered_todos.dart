@@ -3,9 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider_cho_udemy/models/todo_model.dart';
-import 'package:provider_cho_udemy/providers/todo_filter.dart';
-import 'package:provider_cho_udemy/providers/todo_list.dart';
-import 'package:provider_cho_udemy/providers/todo_search.dart';
+import 'package:provider_cho_udemy/providers/providers.dart';
 
 class FilteredTodosState extends Equatable {
   final List<Todo> filteredTodos;
@@ -59,7 +57,7 @@ class FilteredTodos with ChangeNotifier {
     if (todoSearch.state.searchTerm.isNotEmpty) {
       _filteredTodos = _filteredTodos.where((Todo todo) {
         return todo.desc.toLowerCase().contains(
-              todoSearch.state.searchTerm,
+              todoSearch.state.searchTerm.toLowerCase(),
             );
       }).toList();
     }

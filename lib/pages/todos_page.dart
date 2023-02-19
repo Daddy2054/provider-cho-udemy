@@ -158,13 +158,28 @@ class _CreateTodoState extends State<CreateTodo> {
 }
 
 class ShowTodos extends StatelessWidget {
-  const ShowTodos({Key? key}): super(key:key);
+  const ShowTodos({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final todos = context.watch<FilteredTodos>().state.filteredTodos;
-    //print(todos);
-    //print(index);
+
+    Widget showBackground(int direction) {
+      return Container(
+        margin: EdgeInsets.all(4),
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        color: Colors.red,
+        alignment:
+            direction == 0 ? Alignment.centerLeft : Alignment.centerRight,
+        child: Icon(
+          Icons.delete,
+          size: 30,
+          color: Colors.white,
+        ),
+        //  SizedBox(width: 20),
+      );
+    }
+
     return ListView.separated(
       primary: false,
       shrinkWrap: true,
@@ -177,9 +192,16 @@ class ShowTodos extends StatelessWidget {
         color: Colors.grey,
       ),
       itemBuilder: (BuildContext context, int index) {
-        return Text(
-          todos[index].desc,
-          style: TextStyle(fontSize: 20),
+        return Dismissible(
+          key: ValueKey(
+            todos[index].id,
+          ),
+          background: showBackground(0),
+          secondaryBackground: showBackground(1),
+          child: Text(
+            todos[index].desc,
+            style: TextStyle(fontSize: 20),
+          ),
         );
       },
     );

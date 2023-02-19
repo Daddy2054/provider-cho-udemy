@@ -18,32 +18,30 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<TodoList>(create: (context) => TodoList()),
         ChangeNotifierProvider<TodoFilter>(create: (context) => TodoFilter()),
         ChangeNotifierProvider<TodoSearch>(create: (context) => TodoSearch()),
-
-        ChangeNotifierProxyProvider<TodoList, ActiveTodoCount>(
-          create: (context) => ActiveTodoCount(
-            initialActiveTodoCount: context.read<TodoList>().state.todos.length,
-          ),
+        ProxyProvider<TodoList, ActiveTodoCount>(
           update: (
             BuildContext context,
             TodoList todoList,
-            ActiveTodoCount? activeTodoCount,
+            ActiveTodoCount? _,
           ) {
-            return activeTodoCount!..update(todoList);
+            return ActiveTodoCount(
+              todoList: todoList,
+            );
           },
         ),
-        ChangeNotifierProxyProvider3<TodoList, TodoFilter, TodoSearch,
-            FilteredTodos>(
-          create: (context) => FilteredTodos(
-            initialFilteredTodos: context.read<TodoList>().state.todos,
-          ),
+        ProxyProvider3<TodoList, TodoFilter, TodoSearch, FilteredTodos>(
           update: (
             BuildContext context,
             TodoList todoList,
             TodoFilter todoFilter,
             TodoSearch todoSearch,
-            FilteredTodos? filteredTodos,
+            FilteredTodos? _,
           ) {
-            return filteredTodos!..update(todoList, todoFilter, todoSearch);
+            return FilteredTodos(
+              todoList: todoList,
+              todoFilter: todoFilter,
+              todoSearch: todoSearch,
+            );
           },
         ),
       ],

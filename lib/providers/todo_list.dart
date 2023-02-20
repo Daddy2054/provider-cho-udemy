@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 
 import '../models/todo_model.dart';
 
@@ -31,16 +32,15 @@ class TodoListState extends Equatable {
   }
 }
 
-class TodoList with ChangeNotifier {
-  TodoListState _state = TodoListState.initial();
-  TodoListState get state => _state;
+class TodoList extends StateNotifier<TodoListState> {
+
+  TodoList() : super(TodoListState.initial());
 
   void addTodo(String todoDesc) {
     final newTodo = Todo(desc: todoDesc);
-    final newTodos = [..._state.todos, newTodo];
-    _state = _state.copyWith(todos: newTodos);
-    print(_state);
-    notifyListeners();
+    final newTodos = [...state.todos, newTodo];
+    state = state.copyWith(todos: newTodos);
+    print(state);
   }
 
   void editTodo(String id, String todoDesc) {
@@ -54,9 +54,7 @@ class TodoList with ChangeNotifier {
       }
       return todo;
     }).toList();
-    _state = _state.copyWith(todos: newTodos);
-
-    notifyListeners();
+    state = state.copyWith(todos: newTodos);
   }
 
   void toggleTodo(String id) {
@@ -70,9 +68,7 @@ class TodoList with ChangeNotifier {
       }
       return todo;
     }).toList();
-    _state = _state.copyWith(todos: newTodos);
-
-    notifyListeners();
+    state = state.copyWith(todos: newTodos);
   }
 
   void removeTodo(Todo todo) {

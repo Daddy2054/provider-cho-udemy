@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 
 import '../models/todo_model.dart';
 
@@ -10,7 +11,7 @@ class TodoFilterState extends Equatable {
     required this.filter,
   });
 
-factory TodoFilterState.initial() => TodoFilterState(filter: Filter.all);
+  factory TodoFilterState.initial() => TodoFilterState(filter: Filter.all);
 
   @override
   List<Object> get props => [filter];
@@ -27,13 +28,12 @@ factory TodoFilterState.initial() => TodoFilterState(filter: Filter.all);
   }
 }
 
-class TodoFilter with ChangeNotifier {
+class TodoFilter extends StateNotifier<TodoFilterState> {
   TodoFilterState _state = TodoFilterState.initial();
 
-  TodoFilterState get state => _state;
+  TodoFilter() : super(TodoFilterState.initial());
 
   void changeFilter(Filter newFilter) {
-    _state = _state.copyWith(filter: newFilter);
-    notifyListeners();
+    state = state.copyWith(filter: newFilter);
   }
 }

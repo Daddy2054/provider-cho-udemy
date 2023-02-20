@@ -118,7 +118,7 @@ class TodoHeader extends StatelessWidget {
           ),
         ),
         Text(
-          '${context.watch<ActiveTodoCount>().state.activeTodoCount} items left',
+          '${context.watch<ActiveTodoCountState>().activeTodoCount} items left',
           style: TextStyle(
             fontSize: 20,
             color: Colors.redAccent,
@@ -168,7 +168,7 @@ class ShowTodos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final todos = context.watch<FilteredTodos>().state.filteredTodos;
+    final todos = context.watch<FilteredTodosState>().filteredTodos;
 
     Widget showBackground(int direction) {
       return Container(

@@ -8,7 +8,7 @@ enum Level {
   gold,
 }
 
-class CustomerLevel extends StateNotifier with LocatorMixin {
+class CustomerLevel extends StateNotifier<Level> with LocatorMixin {
   CustomerLevel() : super(Level.bronze);
 
   @override

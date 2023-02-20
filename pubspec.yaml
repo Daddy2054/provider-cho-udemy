@@ -31,8 +31,9 @@ dependencies:
   equatable: ^2.0.3
   flutter:
     sdk: flutter
+  flutter_state_notifier: ^0.7.3
   provider: ^6.0.5
-  uuid: ^3.0.4
+  state_notifier: ^0.7.2+1
 
 dev_dependencies:
   flutter_lints: ^2.0.0

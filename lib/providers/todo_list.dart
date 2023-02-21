@@ -72,14 +72,13 @@ class TodoList extends StateNotifier<TodoListState> {
   }
 
   void removeTodo(Todo todo) {
-    _state = _state.copyWith(
-        todos: _state.todos.where((Todo t) => t.id != todo.id).toList());
-    notifyListeners();
+    state = state.copyWith(
+        todos: state.todos.where((Todo t) => t.id != todo.id).toList());
   }
 
-  void clearCompleted() {
-    _state = _state.copyWith(
-        todos: _state.todos.where((t) => !t.completed).toList());
-    notifyListeners();
-  }
+  // void clearCompleted() {
+  //   _state = _state.copyWith(
+  //       todos: _state.todos.where((t) => !t.completed).toList());
+  //   notifyListeners();
+  // }
 }

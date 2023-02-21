@@ -1,40 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'pages/todos_page.dart';
-import 'providers/providers.dart';
+import 'pages/home_page.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        StateNotifierProvider<TodoFilter, TodoFilterState>(
-            create: (context) => TodoFilter()),
-        StateNotifierProvider<TodoList, TodoListState>(
-            create: (context) => TodoList()),
-        StateNotifierProvider<ActiveTodoCount, ActiveTodoCountState>(
-            create: (context) => ActiveTodoCount()),
-        StateNotifierProvider<TodoSearch, TodoSearchState>(
-            create: (context) => TodoSearch()),
-        StateNotifierProvider<FilteredTodos, FilteredTodosState>(
-            create: (context) => FilteredTodos()),
-      ],
-      child: MaterialApp(
-        title: 'TODOS',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const TodosPage(),
+    return MaterialApp(
+      title: 'Weather App',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: const HomePage(),
     );
   }
 }

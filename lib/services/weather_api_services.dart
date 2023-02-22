@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:open_weather_provider/exeptions/weather_exeption.dart';
+import 'package:open_weather_provider/exceptions/weather_exception.dart';
 import 'package:open_weather_provider/models/direct_geocoding.dart';
 import 'package:open_weather_provider/models/weather.dart';
 
@@ -27,6 +27,7 @@ class WeatherApiServices {
         'appid': dotenv.env['APPID'],
       },
     );
+    print('getDirectGeocoding: $uri');
     try {
       final http.Response response = await httpClient.get(uri);
       if (response.statusCode != 200) {
@@ -50,13 +51,13 @@ class WeatherApiServices {
       host: kApiHost,
       path: '/data/2.5/weather',
       queryParameters: {
-        'lat': '$directGeocoding.lat}',
-        'lon': '$directGeocoding.lon}',
+        'lat': '${directGeocoding.lat}',
+        'lon': '${directGeocoding.lon}',
         'units': kUnit,
         'appid': dotenv.env['APPID'],
       },
     );
-
+print('getWeather: $uri');
     try {
       final http.Response response = await httpClient.get(uri);
       if (response.statusCode != 200) {

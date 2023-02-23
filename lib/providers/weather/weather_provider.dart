@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:open_weather_provider/models/custom_error.dart';
 import 'package:open_weather_provider/models/weather.dart';

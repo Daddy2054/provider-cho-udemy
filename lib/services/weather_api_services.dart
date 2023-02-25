@@ -52,7 +52,7 @@ class WeatherApiServices {
       path: '/data/2.5/weather',
       queryParameters: {
         'lat': '${directGeocoding.lat}',
-        'lon': '$directGeocoding.lon}',
+        'lon': '${directGeocoding.lon}',
         'units': kUnit,
         'appid': dotenv.env['APPID'],
       },

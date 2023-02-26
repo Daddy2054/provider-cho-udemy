@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:open_weather_provider/pages/search_page.dart';
-import 'package:open_weather_provider/pages/settings_page.dart';
-import 'package:open_weather_provider/providers/weather/weather_provider.dart';
-import 'package:open_weather_provider/widgets/error_dialog.dart';
+import 'package:open_weather_provider_refactor/pages/search_page.dart';
+import 'package:open_weather_provider_refactor/pages/settings_page.dart';
+//import 'package:open_weather_provider_refactor/providers/weather/weather_provider.dart';
+import 'package:open_weather_provider_refactor/widgets/error_dialog.dart';
 import 'package:provider/provider.dart';
-// import 'package:open_weather_provider/repositories/weather_repository.dart';
-// import 'package:open_weather_provider/services/weather_api_services.dart';
+// import 'package:open_weather_provider_refactor/repositories/weather_repository.dart';
+// import 'package:open_weather_provider_refactor/services/weather_api_services.dart';
 //import 'package:http/http.dart' as http;
-//import 'package:open_weather_provider/providers/weather/weather_provider.dart';
+//import 'package:open_weather_provider_refactor/providers/weather/weather_provider.dart';
 //import '../providers/weather/weather_provider.dart';
 //import 'package:provider/provider.dart';
-import 'package:open_weather_provider/providers/providers.dart';
+import 'package:open_weather_provider_refactor/providers/providers.dart';
 import 'package:recase/recase.dart';
 
 import '../constants/constants.dart';
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
     final tempUnit = context.watch<TempSettingsProvider>().state.tempUnit;
 
     if (tempUnit == TempUnit.fahrenheit) {
-      return ((temperature *9/5) +32).toStringAsFixed(2) + '°F';
+      return ((temperature * 9 / 5) + 32).toStringAsFixed(2) + '°F';
     }
     return temperature.toStringAsFixed(2) + '°C';
   }

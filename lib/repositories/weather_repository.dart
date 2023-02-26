@@ -1,8 +1,8 @@
-import 'package:open_weather_provider/exceptions/weather_exception.dart';
-import 'package:open_weather_provider/models/custom_error.dart';
-import 'package:open_weather_provider/models/direct_geocoding.dart';
-import 'package:open_weather_provider/models/weather.dart';
-import 'package:open_weather_provider/services/weather_api_services.dart';
+import 'package:open_weather_provider_refactor/exceptions/weather_exception.dart';
+import 'package:open_weather_provider_refactor/models/custom_error.dart';
+import 'package:open_weather_provider_refactor/models/direct_geocoding.dart';
+import 'package:open_weather_provider_refactor/models/weather.dart';
+import 'package:open_weather_provider_refactor/services/weather_api_services.dart';
 
 class WeatherRepository {
   final WeatherApiServices weatherApiServices;
@@ -23,7 +23,7 @@ class WeatherRepository {
         name: directGeocoding.name,
         country: directGeocoding.country,
       );
-         //print('weather: $weather');
+      //print('weather: $weather');
       return weather;
     } on WeatherException catch (e) {
       throw CustomError(errMsg: e.message);

@@ -2,9 +2,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:open_weather_provider/models/custom_error.dart';
-import 'package:open_weather_provider/models/weather.dart';
-import 'package:open_weather_provider/repositories/weather_repository.dart';
+import 'package:open_weather_provider_refactor/models/custom_error.dart';
+import 'package:open_weather_provider_refactor/models/weather.dart';
+import 'package:open_weather_provider_refactor/repositories/weather_repository.dart';
 
 part 'weather_state.dart';
 

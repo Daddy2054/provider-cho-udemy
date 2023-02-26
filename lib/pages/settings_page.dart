@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:open_weather_provider/providers/providers.dart';
+import 'package:open_weather_provider_state/providers/providers.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {

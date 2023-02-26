@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:open_weather_provider/pages/search_page.dart';
-import 'package:open_weather_provider/pages/settings_page.dart';
-import 'package:open_weather_provider/providers/weather/weather_provider.dart';
-import 'package:open_weather_provider/widgets/error_dialog.dart';
+import 'package:open_weather_provider_state/pages/search_page.dart';
+import 'package:open_weather_provider_state/pages/settings_page.dart';
+//import 'package:open_weather_provider_state/providers/weather/weather_provider.dart';
+import 'package:open_weather_provider_state/widgets/error_dialog.dart';
 import 'package:provider/provider.dart';
-// import 'package:open_weather_provider/repositories/weather_repository.dart';
-// import 'package:open_weather_provider/services/weather_api_services.dart';
+// import 'package:open_weather_provider_state/repositories/weather_repository.dart';
+// import 'package:open_weather_provider_state/services/weather_api_services.dart';
 //import 'package:http/http.dart' as http;
-//import 'package:open_weather_provider/providers/weather/weather_provider.dart';
+//import 'package:open_weather_provider_state/providers/weather/weather_provider.dart';
 //import '../providers/weather/weather_provider.dart';
 //import 'package:provider/provider.dart';
-import 'package:open_weather_provider/providers/providers.dart';
+import 'package:open_weather_provider_state/providers/providers.dart';
 import 'package:recase/recase.dart';
 
 import '../constants/constants.dart';
@@ -26,22 +26,23 @@ class _HomePageState extends State<HomePage> {
   String? _city;
 
   late final WeatherProvider _weatherProv;
+    late final void Function() _removeListener;
 
   @override
   void initState() {
     super.initState();
     _weatherProv = context.read<WeatherProvider>();
-    _weatherProv.addListener(_registerListener);
+        _removeListener = _weatherProv.addListener(_registerListener);
   }
 
   @override
   void dispose() {
-    _weatherProv.removeListener(_registerListener);
+    _removeListener();
     super.dispose();
   }
 
-  void _registerListener() {
-    final WeatherState ws = context.read<WeatherProvider>().state;
+  void _registerListener(WeatherState ws) {
+
 
     if (ws.status == WeatherStatus.error) {
       errorDialog(context, ws.error.errMsg);
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
     final tempUnit = context.watch<TempSettingsProvider>().state.tempUnit;
 
     if (tempUnit == TempUnit.fahrenheit) {
-      return ((temperature *9/5) +32).toStringAsFixed(2) + '°F';
+      return ((temperature * 9 / 5) + 32).toStringAsFixed(2) + '°F';
     }
     return temperature.toStringAsFixed(2) + '°C';
   }

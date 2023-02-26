@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:open_weather_provider/providers/providers.dart';
-import 'package:open_weather_provider/services/weather_api_services.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:open_weather_provider_state/providers/providers.dart';
+import 'package:open_weather_provider_state/services/weather_api_services.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'pages/home_page.dart';
-import 'providers/weather/weather_provider.dart';
+//import 'providers/weather/weather_provider.dart';
 import 'repositories/weather_repository.dart';
 
 void main() async {
@@ -27,28 +28,20 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        ChangeNotifierProvider(
-          create: (context) => WeatherProvider(
-            weatherRepository: context.read<WeatherRepository>(),
-          ),
+        StateNotifierProvider<WeatherProvider, WeatherState>(
+          create: (context) => WeatherProvider(),
         ),
-        ChangeNotifierProvider<TempSettingsProvider>(
+        StateNotifierProvider<TempSettingsProvider, TempSettingsState>(
           create: (context) => TempSettingsProvider(),
         ),
-        ChangeNotifierProxyProvider<WeatherProvider, ThemeProvider>(
+        StateNotifierProvider<ThemeProvider, ThemeState>(
           create: (context) => ThemeProvider(),
-          update: (
-            BuildContext context,
-            WeatherProvider weatherProvider,
-            ThemeProvider? themeProvider,
-          ) =>
-              themeProvider!..update(weatherProvider),
         ),
       ],
       builder: (context, _) => MaterialApp(
         title: 'Weather App',
         debugShowCheckedModeBanner: false,
-        theme: context.watch<ThemeProvider>().state.appTheme == AppTheme.light
+        theme: context.watch<ThemeState>().appTheme == AppTheme.light
             ? ThemeData.light()
             : ThemeData.dark(),
         home: const HomePage(),

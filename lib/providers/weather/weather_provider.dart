@@ -1,39 +1,35 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+//import 'package:flutter/foundation.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 
-import 'package:open_weather_provider/models/custom_error.dart';
-import 'package:open_weather_provider/models/weather.dart';
-import 'package:open_weather_provider/repositories/weather_repository.dart';
+import 'package:open_weather_provider_state/models/custom_error.dart';
+import 'package:open_weather_provider_state/models/weather.dart';
+import 'package:open_weather_provider_state/repositories/weather_repository.dart';
+//import 'package:open_weather_provider_state/repositories/weather_repository.dart';
 
 part 'weather_state.dart';
 
-class WeatherProvider with ChangeNotifier {
-  WeatherState _state = WeatherState.initial();
-  WeatherState get state => _state;
-
-  final WeatherRepository weatherRepository;
-  WeatherProvider({
-    required this.weatherRepository,
-  });
+class WeatherProvider extends StateNotifier<WeatherState> with LocatorMixin {
+  WeatherProvider()
+      : super(
+          WeatherState.initial(),
+        );
 
   Future<void> fetchWeather(String city) async {
-    _state = _state.copyWith(status: WeatherStatus.loading);
-    notifyListeners();
+    state = state.copyWith(status: WeatherStatus.loading);
 
     try {
-      final Weather weather = await weatherRepository.fetchWeather(city);
+      final Weather weather = await read<WeatherRepository>().fetchWeather(city);
 
-      _state = _state.copyWith(
+      state = state.copyWith(
         status: WeatherStatus.loaded,
         weather: weather,
       );
-      print('state: $_state');
-      notifyListeners();
+      print('state: $state');
     } on CustomError catch (e) {
-      _state = _state.copyWith(status: WeatherStatus.error, error: e);
-      print('state: $_state');
-      notifyListeners();
+      state = state.copyWith(status: WeatherStatus.error, error: e);
+      print('state: $state');
     }
   }
 }

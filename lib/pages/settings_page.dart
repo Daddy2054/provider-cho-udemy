@@ -18,7 +18,7 @@ class SettingsPage extends StatelessWidget {
         child: ListTile(
           title: Text('Celsius/Fahrenheit (Default: Celsius)'),
           trailing: Switch(
-            value: context.watch<TempSettingsProvider>().state.tempUnit ==
+            value: context.watch<TempSettingsState>().tempUnit ==
                 TempUnit.celsius,
             onChanged: (_) {
               context.read<TempSettingsProvider>().toggleTempUnit();

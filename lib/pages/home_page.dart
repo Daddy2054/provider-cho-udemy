@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   String showTemperature(double temperature) {
-    final tempUnit = context.watch<TempSettingsProvider>().state.tempUnit;
+    final tempUnit = context.watch<TempSettingsState>().tempUnit;
 
     if (tempUnit == TempUnit.fahrenheit) {
       return ((temperature * 9 / 5) + 32).toStringAsFixed(2) + '°F';
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _showWeather() {
-    final state = context.watch<WeatherProvider>().state;
+    final state = context.watch<WeatherState>();
     if (state.status == WeatherStatus.initial) {
       return Center(
         child: Text(

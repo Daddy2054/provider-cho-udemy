@@ -1,3 +1,4 @@
+import 'package:fb_auth_provider/pages/home_page.dart';
 import 'package:fb_auth_provider/pages/signin_page.dart';
 import 'package:fb_auth_provider/providers/auth/auth_provider.dart';
 import 'package:fb_auth_provider/providers/auth/auth_state.dart';
@@ -14,7 +15,7 @@ class SplashPage extends StatelessWidget {
 
     if (authState.authStatus == AuthStatus.authenticated) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushNamed(context, SigninPage.routeName);
+        Navigator.pushNamed(context, HomePage.routeName);
       });
     } else if (authState.authStatus == AuthStatus.unauthenticated) {
       WidgetsBinding.instance.addPostFrameCallback((_) {

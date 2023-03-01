@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "133955980947",
-    "project_id": "fb-auth-provider2",
-    "storage_bucket": "fb-auth-provider2.appspot.com"
+    "project_number": "688704141567",
+    "project_id": "fb-statenf-auth2",
+    "storage_bucket": "fb-statenf-auth2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:133955980947:android:046e639b3813404ebcc766",
+        "mobilesdk_app_id": "1:688704141567:android:ad718e2b084597a308b4ca",
         "android_client_info": {
           "package_name": "com.example.provider_cho_udemy"
         }
       },
       "oauth_client": [
         {
-          "client_id": "133955980947-a8cemjbnpqgic1r94mcdabh1ilih3j6n.apps.googleusercontent.com",
+          "client_id": "688704141567-23kifr0avpo9lnu1f6uosurl16scstp7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCEr_YF8UDPdBM11qgQOVVT2zO1dO-mO0c"
+          "current_key": "AIzaSyCuf6v2hMDZRQf3iaei6FMvVrYVRGOgxaQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "133955980947-a8cemjbnpqgic1r94mcdabh1ilih3j6n.apps.googleusercontent.com",
+              "client_id": "688704141567-23kifr0avpo9lnu1f6uosurl16scstp7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

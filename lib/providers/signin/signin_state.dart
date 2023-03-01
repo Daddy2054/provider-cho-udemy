@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-import 'package:fb_auth_provider/models/custom_error.dart';
+import 'package:fb_statenf_auth/models/custom_error.dart';
 
 enum SigninStatus {
   initial,

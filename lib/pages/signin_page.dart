@@ -1,8 +1,8 @@
-import 'package:fb_auth_provider/models/custom_error.dart';
-import 'package:fb_auth_provider/pages/signup_page.dart';
-import 'package:fb_auth_provider/providers/signin/signin_provider.dart';
-import 'package:fb_auth_provider/providers/signin/signin_state.dart';
-import 'package:fb_auth_provider/utils/error_dialog.dart';
+import 'package:fb_statenf_auth/models/custom_error.dart';
+import 'package:fb_statenf_auth/pages/signup_page.dart';
+import 'package:fb_statenf_auth/providers/signin/signin_provider.dart';
+import 'package:fb_statenf_auth/providers/signin/signin_state.dart';
+import 'package:fb_statenf_auth/utils/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,5 @@
-import 'package:fb_auth_provider/pages/profile_page.dart';
-import 'package:fb_auth_provider/providers/auth/auth_provider.dart';
+import 'package:fb_statenf_auth/pages/profile_page.dart';
+import 'package:fb_statenf_auth/providers/auth/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

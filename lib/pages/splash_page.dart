@@ -1,7 +1,7 @@
-import 'package:fb_auth_provider/pages/home_page.dart';
-import 'package:fb_auth_provider/pages/signin_page.dart';
-import 'package:fb_auth_provider/providers/auth/auth_provider.dart';
-import 'package:fb_auth_provider/providers/auth/auth_state.dart';
+import 'package:fb_statenf_auth/pages/home_page.dart';
+import 'package:fb_statenf_auth/pages/signin_page.dart';
+import 'package:fb_statenf_auth/providers/auth/auth_provider.dart';
+import 'package:fb_statenf_auth/providers/auth/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

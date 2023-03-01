@@ -1,6 +1,6 @@
-import 'package:fb_auth_provider/providers/profile/profile_provider.dart';
-import 'package:fb_auth_provider/providers/profile/profile_state.dart';
-import 'package:fb_auth_provider/utils/error_dialog.dart';
+import 'package:fb_statenf_auth/providers/profile/profile_provider.dart';
+import 'package:fb_statenf_auth/providers/profile/profile_state.dart';
+import 'package:fb_statenf_auth/utils/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fbAuth;

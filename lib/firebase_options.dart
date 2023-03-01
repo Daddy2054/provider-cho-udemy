@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCEr_YF8UDPdBM11qgQOVVT2zO1dO-mO0c',
-    appId: '1:133955980947:android:046e639b3813404ebcc766',
-    messagingSenderId: '133955980947',
-    projectId: 'fb-auth-provider2',
-    storageBucket: 'fb-auth-provider2.appspot.com',
+    apiKey: 'AIzaSyCuf6v2hMDZRQf3iaei6FMvVrYVRGOgxaQ',
+    appId: '1:688704141567:android:ad718e2b084597a308b4ca',
+    messagingSenderId: '688704141567',
+    projectId: 'fb-statenf-auth2',
+    storageBucket: 'fb-statenf-auth2.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD0_8OfPS5Yo12_uxyTMbBiwEnLmqpkT4I',
-    appId: '1:133955980947:ios:841490581f773009bcc766',
-    messagingSenderId: '133955980947',
-    projectId: 'fb-auth-provider2',
-    storageBucket: 'fb-auth-provider2.appspot.com',
-    iosClientId: '133955980947-pumrojkcm9762g5qhrsg5nil54fkm5t7.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAXBbfWBDx4iGMVpUsVRiwkUPAgnm_w3oI',
+    appId: '1:688704141567:ios:d70ef4e934eba7e408b4ca',
+    messagingSenderId: '688704141567',
+    projectId: 'fb-statenf-auth2',
+    storageBucket: 'fb-statenf-auth2.appspot.com',
+    iosClientId: '688704141567-9lapdvil1eef4f01oi4t1679ffph2mt8.apps.googleusercontent.com',
     iosBundleId: 'com.example.providerChoUdemy',
   );
 }
